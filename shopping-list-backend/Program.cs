@@ -12,6 +12,19 @@ builder.Services.AddDbContext<ShoppingListDBContext>(options => options.UseSqlSe
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var AllowLocalHost3000Origin = "_allowLocalhost3000";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: AllowLocalHost3000Origin,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:3000")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                      });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,6 +35,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(AllowLocalHost3000Origin);
 
 app.UseAuthorization();
 

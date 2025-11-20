@@ -22,6 +22,17 @@ namespace shopping_list_backend.Controllers
             return Ok(dbContext.Users.AsEnumerable().ToArray());
         }
 
+        [HttpGet("{id}")]
+        public ActionResult<User> GetUser(string id) {
+            var user = dbContext.Users
+                .Where(user => user.Id == id)
+                .Select(user => new
+                {
+                    user.Name,
+                });
+            return Ok(user);
+        }
+
 
         [HttpPost]  
         public ActionResult AddUser(User user)
@@ -32,7 +43,6 @@ namespace shopping_list_backend.Controllers
             }
             else
             {
-
                using (var sha256 = SHA256.Create())
                 {
                     //Basic hashing cause this is for kids and honestly if they can to brute force it they deserve it.
