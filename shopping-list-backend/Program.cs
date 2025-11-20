@@ -1,8 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using shopping_list_backend.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddDbContext<ShoppingListDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ProductionConnection")));
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
