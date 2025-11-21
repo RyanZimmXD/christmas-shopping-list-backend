@@ -29,7 +29,7 @@ namespace shopping_list_backend.Controllers
                 .Select(user => new
                 {
                     user.Name,
-                });
+                }).FirstOrDefault();
             return Ok(user);
         }
 

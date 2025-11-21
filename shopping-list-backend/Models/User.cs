@@ -13,8 +13,6 @@ namespace shopping_list_backend.Models
 
         [Column(TypeName = "nvarchar(max)")]
         public string PasswordHash { get; set; }
-
-        [NotMapped]
         public List<ShoppingItem> ShoppingItems { get; set; }
     }
 }
